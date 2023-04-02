@@ -14,9 +14,9 @@ class Application
         $this->append('GET', $route, $handler);
     }
 
-    public function post(string $route, array $handler): void
+    public function post(string $route, array $handler, $formData = null): void
     {
-        $this->append('POST', $route, $handler);
+        $this->append('POST', $route, $handler, $formData);
     }
 
     #[NoReturn]
@@ -27,14 +27,14 @@ class Application
 
         foreach ($this->handlers as $item) {
 
-            list($handlerMethod, $route, $handler) = $item;
+            list($handlerMethod, $route, $handler, $formData) = $item;
             list($class, $classMethod) = $handler;
 
             $argument = $this->getArgument($route, $uri);
             $isMethod = $method === $handlerMethod;
 
             if ($isMethod && $route === $uri) {
-                echo (new $class())->$classMethod();
+                echo (new $class())->$classMethod($formData);
                 die();
             }
 
@@ -48,9 +48,9 @@ class Application
         die();
     }
 
-    private function append(string $method, string $route, array $handler): void
+    private function append(string $method, string $route, array $handler, $formData = null): void
     {
-        $this->handlers[] = [$method, $route, $handler];
+        $this->handlers[] = [$method, $route, $handler, $formData];
     }
 
     private function getArgument(string $route, string $uri): null|string

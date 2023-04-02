@@ -30,19 +30,21 @@ class UserController extends AbstractController
         return $this->render('users/create.php', compact('user'));
     }
 
-    public function update($data)
+    public function update($data = null)
     {
+        $data = $_POST['data'];
         $repository = new UserRepository();
         $user = new User();
-
-        $user->setId(2);
-        $user->setFirstName($data['firstName']);
-        $user->setLastName($data['lastName']);
-        $user->setOldYear($data['oldYear']);
-        $user->setLogin($data['login']);
-        $user->setPassword(PasswordHash::hashPassword($data['password']));
+        $user->setId($data['\'id\'']);
+        $user->setFirstName($data['\'firstName\'']);
+        $user->setLastName($data['\'lastName\'']);
+        $user->setOldYear($data['\'oldYear\'']);
+        $user->setLogin($data['\'login\'']);
+        $user->setPassword(PasswordHash::hashPassword($data['\'password\'']));
 
         $repository->addUser($user->toArray());
+
+        return $this->redirectTo('/users');
 
     }
 }
