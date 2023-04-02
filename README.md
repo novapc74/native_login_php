@@ -1,3 +1,17 @@
+### How to use with 'Ubuntu':
+```angular2html
+$ git clone git@github.com:novapc74/native_login_php.git
+$ sudo make init
+```
+### // TODO
+```angular2html
+1. fix entrypoint (remove to other class)
+2. validation in form (POST) + errors[]
+3. generate unique id for entity
+4. generate slug for user / find user by slug
+5. resolve query parameters for routers
+6. $_SESSION for login user
+```
 ## Тестовое задание.
 ***
 ### Создать:
