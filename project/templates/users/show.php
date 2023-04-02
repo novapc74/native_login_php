@@ -2,19 +2,19 @@
     <?php $user = $data['user']; ?>
     <ul>
         <li>
-            <?= "ID: " . $user['id'] ?>
+            <?= "ID: " . $user->id ?>
         </li>
         <li>
-            <?= "Имя " . $user['firstName'] ?>
+            <?= "Имя " . $user->firstName ?>
         </li>
         <li>
-            <?= "Фамилия " . $user['lastName'] ?>
+            <?= "Фамилия " . $user->lastName ?>
         </li>
         <li>
-            <?= "Возраст " . $user['oldYear'] ?>
+            <?= "Возраст " . $user->oldYear ?>
         </li>
         <li>
-            <?= "Логин " . $user['login'] ?>
+            <?= "Логин " . $user->login ?>
         </li>
     </ul>
 <?php endif ?>

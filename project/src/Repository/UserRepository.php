@@ -15,7 +15,7 @@ class UserRepository
 
     public function getOneBy($parameter)
     {
-        $users = array_filter($this->connection->getDB('users'), fn($user) => $user['id'] == $parameter);
+        $users = array_filter($this->connection->getDB('users'), fn($user) => $user->id == $parameter);
 
         return array_shift($users);
     }
@@ -25,7 +25,7 @@ class UserRepository
         return $this->connection->getDB('users');
     }
 
-    public function addUser(array $user)
+    public function addUser($user)
     {
         $users = $this->getAll();
         $users[] = $user;

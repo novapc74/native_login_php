@@ -26,7 +26,7 @@ class DataBase
             file_put_contents(self::DB_PATH, json_encode($context));
         }
 
-        return json_decode(file_get_contents(self::DB_PATH), true);
+        return json_decode(file_get_contents(self::DB_PATH));
     }
 
 }

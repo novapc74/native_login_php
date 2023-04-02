@@ -16,6 +16,8 @@ $app->get('/users', [UserController::class, 'index']);
 
 $app->get('/users/{id}', [UserController::class, 'show']);
 
-$app->post('/users/{id}', [UserController::class, 'create']);
+$app->get('/users/create', [UserController::class, 'create']);
+
+$app->post('/users/update', [UserController::class, 'update']);
 
 $app->run();

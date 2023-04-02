@@ -10,24 +10,9 @@ class UserController extends AbstractController
 {
     public function index(): string
     {
-        $users = [];
         $repository = new UserRepository();
-
-        $user = new User();
-
-        $user->setId(1);
-        $user->setFirstName('Ivan');
-        $user->setLastName('Ivanov');
-        $user->setOldYear('20');
-        $user->setPassword(PasswordHash::hasPassword('secret'));
-        $user->setLogin('new login');
-
-        $repository->addUser($user->toArray());
-
-        $users[] = $user;
-        $title = 'Ура!!!';
-
-        return $this->render('users/index.php', compact('users', 'title'));
+        $users = $repository->getAll();
+        return $this->render('users/index.php', compact('users'));
     }
 
     public function show($id): string
@@ -38,11 +23,26 @@ class UserController extends AbstractController
         return $this->render('users/show.php', compact('user'));
     }
 
-    public function create($id): string
+    public function create(): string
     {
-        return $this->render('base.html', [
-            'title' => $id,
-            'users' => ["user id: $id"]
-        ]);
+        $user = new User();
+
+        return $this->render('users/create.php', compact('user'));
+    }
+
+    public function update($data)
+    {
+        $repository = new UserRepository();
+        $user = new User();
+
+        $user->setId(2);
+        $user->setFirstName($data['firstName']);
+        $user->setLastName($data['lastName']);
+        $user->setOldYear($data['oldYear']);
+        $user->setLogin($data['login']);
+        $user->setPassword(PasswordHash::hashPassword($data['password']));
+
+        $repository->addUser($user->toArray());
+
     }
 }

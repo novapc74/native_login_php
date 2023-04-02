@@ -4,7 +4,7 @@ namespace App\Service;
 
 class PasswordHash
 {
-    public static function hasPassword($password): string
+    public static function hashPassword($password): string
     {
         return password_hash($password, null);
     }
