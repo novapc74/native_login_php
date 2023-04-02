@@ -1,0 +1,15 @@
+{
+  "type": "project",
+  "license": "proprietary",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=8.1"
+  },
+  "autoload": {
+    "files": ["public/index.php"],
+    "psr-4": {
+      "App\\": "src"
+    }
+  }
+}

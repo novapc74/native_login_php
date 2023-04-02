@@ -1,10 +1,2 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 <h1>Main Page</h1>
-</body>
-</html>
+<a href="/users">Пользователи</a>

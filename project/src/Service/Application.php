@@ -1,42 +1,51 @@
 <?php
 
-namespace App;
+namespace App\Service;
 
-use App\Controller\MainPageController;
+use App\Controller\UndefinedPageController;
+use JetBrains\PhpStorm\NoReturn;
 
 class Application
 {
     private array $handlers = [];
-
 
     public function get(string $route, array $handler): void
     {
         $this->append('GET', $route, $handler);
     }
 
-//    public function post(string $route, callable $handler): void
-//    {
-//        $this->append('POST', $route, $handler);
-//    }
+    public function post(string $route, array $handler): void
+    {
+        $this->append('POST', $route, $handler);
+    }
 
+    #[NoReturn]
     public function run(): void
     {
         $uri = $_SERVER['REQUEST_URI'];
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->handlers as $item) {
-            [$handlerMethod, $route, $handler] = $item;
-            [$class, $classMethod] = $handler;
+
+            list($handlerMethod, $route, $handler) = $item;
+            list($class, $classMethod) = $handler;
+
             $argument = $this->getArgument($route, $uri);
             $isMethod = $method === $handlerMethod;
-            if($isMethod && $route === $uri) {
-                $controllerClass = new MainPageController();
-                
-                echo $controllerClass->index();
-            } elseif ($isMethod && $argument) {
-                echo $handler($argument);
+
+            if ($isMethod && $route === $uri) {
+                echo (new $class())->$classMethod();
+                die();
+            }
+
+            if ($isMethod && null != $argument) {
+                echo (new $class())->$classMethod($argument);
+                die();
             }
         }
+
+        echo (new UndefinedPageController())->index();
+        die();
     }
 
     private function append(string $method, string $route, array $handler): void

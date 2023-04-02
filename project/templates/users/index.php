@@ -1,9 +1,9 @@
 
-<h1>Title: <?= $title ?></h1>
+<h1>Title: <?= $data['title'] ?></h1>
 
-<?php if (null != $users) : ?>
+<?php if (null != $data['users']) : ?>
 <ul>
-    <?php foreach ($users as $user) : ?>
+    <?php foreach ($data['users'] as $user) : ?>
         <li>
             <?= $user ?>
         </li>

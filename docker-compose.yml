@@ -1,0 +1,38 @@
+version: '3.0'
+
+services:
+  nginx:
+    build:
+      context: ./docker/nginx
+    volumes:
+      - ./project:/project
+    container_name: ${APP_NAME}-nginx
+    restart: always
+    ports:
+      - "8077:80"
+    command: nginx -g 'daemon off;'
+
+  php-fpm:
+    build:
+      context: ./docker/php-fpm
+    environment:
+      XDEBUG_CONFIG: "remote_host=172.18.18.1 remote_enable=1 remote_autostart=off  remote_port=9008"
+      PHP_IDE_CONFIG: "serverName=first"
+    volumes:
+      - ./project:/project
+      - ./docker/app_settings_php.ini:/usr/local/etc/php/conf.d/app_settings_php.ini
+    container_name: ${APP_NAME}-php-fpm
+#    depends_on:
+#      - db
+
+  php-cli:
+    build:
+      context: ./docker/php-cli
+    volumes:
+      - ./project:/project
+      - ./docker/app_settings_php.ini:/usr/local/etc/php/conf.d/app_settings_php.ini
+    command: sleep 10000
+    container_name: ${APP_NAME}-php-cli
+
+volumes:
+  login_register_test:
