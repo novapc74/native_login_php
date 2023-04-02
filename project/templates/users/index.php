@@ -11,16 +11,19 @@
         </tr>
         <?php foreach ($data['users'] as $user) : ?>
 
-        <tr>
+            <tr>
                 <td><?= $user->id ?></td>
                 <td><?= $user->firstName ?></td>
                 <td><?= $user->lastName ?></td>
                 <td><?= $user->oldYear ?></td>
                 <td><a href="/users/<?= $user->id ?>"><?= $user->login ?></a></td>
                 <td><?= $user->password ?></td>
-        </tr>
+            </tr>
         <?php endforeach; ?>
 
     </table>
-<a href="/users/create">Create User</a>
+    <a href="/users/create">Create User</a>
+    <br>
+    <a href="/">На главную</a>
+
 <?php endif ?>

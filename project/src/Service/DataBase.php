@@ -25,8 +25,7 @@ class DataBase
         if ($context) {
             file_put_contents(self::DB_PATH, json_encode($context));
         }
-
-        return json_decode(file_get_contents(self::DB_PATH));
+        return json_decode(file_get_contents(self::DB_PATH)) ?? [];
     }
 
 }

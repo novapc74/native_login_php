@@ -6,8 +6,7 @@ use App\Service\DataBase;
 
 class UserRepository
 {
-    private $content;
-    private $connection;
+    private DataBase $connection;
     public function __construct()
     {
         $this->connection = DataBase::getInstance();
@@ -22,10 +21,10 @@ class UserRepository
 
     public function getAll(): ?array
     {
-        return $this->connection->getDB('users');
+        return $this->connection->getDB('users', null) ?? [];
     }
 
-    public function addUser($user)
+    public function addUser($user): void
     {
         $users = $this->getAll();
         $users[] = $user;

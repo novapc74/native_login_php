@@ -35,5 +35,7 @@ $user = $data['user'] ?>
            placeholder="Enter old year">
     <br>
     <button type="submit">Create User</button>
+    <br>
+    <a href="/">На главную</a>
 
 </form>

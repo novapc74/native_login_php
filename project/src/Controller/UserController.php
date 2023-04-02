@@ -12,6 +12,11 @@ class UserController extends AbstractController
     {
         $repository = new UserRepository();
         $users = $repository->getAll();
+
+        if ($users === []) {
+            return $this->redirectTo('/users/create');
+        }
+
         return $this->render('users/index.php', compact('users'));
     }
 
