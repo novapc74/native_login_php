@@ -5,7 +5,7 @@
 <ul>
     <?php foreach ($data['users'] as $user) : ?>
         <li>
-            <?= $user ?>
+            <?= $user->getId() ?>
         </li>
     <?php endforeach; ?>
 </ul>

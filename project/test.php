@@ -9,4 +9,17 @@ function generateSlug(string $string): string
     return str_replace(' ', '_', $string);
 }
 
-echo generateSlug("test data");
+function passHash($path)
+{
+    return password_hash($path, null);
+}
+function checkPass($hash, $pass)
+{
+    return password_verify($pass, $hash);
+}
+
+//echo generateSlug("test data");
+
+$data =  passHash('это мой пароль');
+$res = checkPass($data, 'это мой пароль');
+var_dump($res);

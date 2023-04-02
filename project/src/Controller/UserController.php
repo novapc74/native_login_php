@@ -2,23 +2,39 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+use App\Service\PasswordHash;
+
 class UserController extends AbstractController
 {
     public function index(): string
     {
-        $title = 'Users Page';
-        $users = ['1', '2', '3#####3', '4'];
+        $users = [];
+        $repository = new UserRepository();
 
-        return $this->render('users/index.php', compact('title', 'users'));
+        $user = new User();
+
+        $user->setId(1);
+        $user->setFirstName('Ivan');
+        $user->setLastName('Ivanov');
+        $user->setOldYear('20');
+        $user->setPassword(PasswordHash::hasPassword('secret'));
+        $user->setLogin('new login');
+
+        $repository->addUser($user->toArray());
+
+        $users[] = $user;
+        $title = 'Ура!!!';
+
+        return $this->render('users/index.php', compact('users', 'title'));
     }
 
     public function show($id): string
     {
-        $user = [
-            'id' => $id,
-            'firstName' => 'Ivan',
-            'lastName' => 'Ivanov',
-        ];
+        $repository = new UserRepository();
+        $user = $repository->getOneBy($id);
+
         return $this->render('users/show.php', compact('user'));
     }
 
